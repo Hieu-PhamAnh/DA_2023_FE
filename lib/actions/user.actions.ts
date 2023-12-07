@@ -8,6 +8,9 @@ import Thread from "../models/thread.model";
 import User from "../models/user.model";
 import Event from "../models/event.model";
 import { connectToDB } from "../mongoose";
+import axios from "axios";
+import { POSITION } from "@/constants";
+// import { axios } from axios
 
 export async function followUser({
   followerId,
@@ -102,6 +105,21 @@ interface Params {
   bio: string;
   image: string;
   path: string;
+  position: string;
+  Crossing: string;
+  Finishing: string;
+  Heading: string;
+  ShortPass: string;
+  Freekick: string;
+  LongPass: string;
+  BallControl: string;
+  Intercept: string;
+  Positioning: string;
+  Marking: string;
+  Tackle: string;
+  GKReflexes: string;
+  Height: string;
+  Weight: string;
 }
 
 export async function updateUser({
@@ -111,9 +129,56 @@ export async function updateUser({
   path,
   username,
   image,
+  position,
+  Crossing,
+  Finishing,
+  Heading,
+  ShortPass,
+  Freekick,
+  LongPass,
+  BallControl,
+  Intercept,
+  Positioning,
+  Marking,
+  Tackle,
+  GKReflexes,
+  Height,
+  Weight,
 }: Params): Promise<void> {
   try {
     connectToDB();
+
+    let result = 0;
+    let stats = [
+      Crossing,
+      Finishing,
+      Heading,
+      ShortPass,
+      Freekick,
+      LongPass,
+      BallControl,
+      Intercept,
+      Positioning,
+      Marking,
+      Tackle,
+      GKReflexes,
+      Height,
+      Weight,
+    ];
+
+    //   console.log(stats);
+    await axios
+      .post(`http://localhost/predict`, {
+        stats,
+      })
+      .then(async (response) => {
+        result = response.data.position;
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    let position = POSITION[result];
+    console.log(position);
 
     await User.findOneAndUpdate(
       { id: userId },
@@ -122,6 +187,21 @@ export async function updateUser({
         name,
         bio,
         image,
+        position,
+        Crossing,
+        Finishing,
+        Heading,
+        ShortPass,
+        Freekick,
+        LongPass,
+        BallControl,
+        Intercept,
+        Positioning,
+        Marking,
+        Tackle,
+        GKReflexes,
+        Height,
+        Weight,
         onboarded: true,
       },
       { upsert: true }
@@ -361,7 +441,7 @@ export async function getActivity(userId: string) {
         activityType: "event",
       };
     });
-    
+
     const approveData = await Event.find({ userId: userId });
     const approveActivity = approveData.map(async (event) => {
       const author = await User.findOne({ _id: event.author });
@@ -389,9 +469,13 @@ export async function getActivity(userId: string) {
     });
     const teamJoinData = userEvents.map(async (event) => {
       const author = await User.findOne({ _id: event.author });
-      const opponent = await  User.findOne({ _id: event.opponent });
-      const team1Members = await User.find({ _id: { $in: event.team1.members } });
-      const team2Members = await User.find({ _id: { $in: event.team2.members } });
+      const opponent = await User.findOne({ _id: event.opponent });
+      const team1Members = await User.find({
+        _id: { $in: event.team1.members },
+      });
+      const team2Members = await User.find({
+        _id: { $in: event.team2.members },
+      });
 
       const teamJoinActivity = {
         author: {
@@ -417,7 +501,7 @@ export async function getActivity(userId: string) {
       };
       return teamJoinActivity;
     });
-    
+
     const activityPromises = await Promise.all([
       ...replies,
       ...reactionsAndFollowers,
@@ -425,19 +509,17 @@ export async function getActivity(userId: string) {
       ...approveActivity,
       ...teamJoinData,
     ]);
-    
+
     const activity = activityPromises
       .filter((i) => i !== null)
       .sort((a, b) => b?.createdAt - a?.createdAt);
-    
-    return activity;
 
+    return activity;
   } catch (error) {
     console.error("Error fetching activity: ", error);
     throw error;
   }
 }
-
 
 export async function fetchUserEvents(authorId: string) {
   try {
@@ -470,4 +552,3 @@ export async function fetchUserEvents(authorId: string) {
     throw error;
   }
 }
-

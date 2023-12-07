@@ -1,4 +1,5 @@
-export const sidebarLinks = [{
+export const sidebarLinks = [
+  {
     imgURL: "/assets/home.svg",
     route: "/",
     label: "Home",
@@ -35,28 +36,47 @@ export const sidebarLinks = [{
   },
 ];
 
-export const profileTabs = [{
+export const profileTabs = [
+  {
     value: "threads",
     label: "Posts",
-    icon: "/assets/reply.svg"
+    icon: "/assets/reply.svg",
   },
   {
     value: "followers",
     label: "Followers",
-    icon: "/assets/members.svg"
+    icon: "/assets/members.svg",
   },
   {
     value: "following",
     label: "Following",
-    icon: "/assets/members.svg"
+    icon: "/assets/members.svg",
   },
   {
     value: "events",
     label: "Events",
-    icon: "/assets/event.svg"
+    icon: "/assets/event.svg",
   },
 ];
 
+export const POSITION = ["Thủ môn", "Hậu vệ", "Tiền vệ", "Tiền đạo"];
+
+export const STAT = [
+  "Crossing",
+  "Finishing",
+  "Heading",
+  "ShortPass",
+  "Freekick",
+  "LongPass",
+  "BallControl",
+  "Intercept",
+  "Positioning",
+  "Marking",
+  "Tackle",
+  "GKReflexes",
+  "Height",
+  "Weight",
+];
 // export const communityTabs = [{
 //     value: "threads",
 //     label: "Threads",

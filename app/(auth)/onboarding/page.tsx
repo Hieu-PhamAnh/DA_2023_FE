@@ -18,6 +18,21 @@ async function Page() {
     name: userInfo?.name || user?.firstName || "",
     bio: userInfo?.bio || "",
     image: userInfo?.image || user?.imageUrl,
+    position: userInfo?.Crossing || "",
+    Crossing: userInfo?.Crossing || "",
+    Finishing: userInfo?.Finishing || "",
+    Heading: userInfo?.Heading || "",
+    ShortPass: userInfo?.ShortPass || "",
+    Freekick: userInfo?.Freekick || "",
+    LongPass: userInfo?.LongPass || "",
+    BallControl: userInfo?.BallControl || "",
+    Intercept: userInfo?.Intercept || "",
+    Positioning: userInfo?.Positioning || "",
+    Marking: userInfo?.Marking || "",
+    Tackle: userInfo?.Tackle || "",
+    GKReflexes: userInfo?.GKReflexes || "",
+    Height: userInfo?.Height || "",
+    Weight: userInfo?.Weighi || "",
   };
 
   return (
@@ -25,10 +40,9 @@ async function Page() {
       <section className="mt-9 bg-dark-2 p-10">
         <h1 className="head-text">Onboarding</h1>
         <p className="mt-3 text-base-regular text-light-2 my-5">
-          Complete your profile now to use Last Dance
+          Complete your profile now to use SocialSport
         </p>
 
-  
         <AccountProfile user={userData} btnTitle="Continue" />
       </section>
     </main>

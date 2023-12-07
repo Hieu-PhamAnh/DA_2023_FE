@@ -7,8 +7,8 @@ import { dark } from "@clerk/themes";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Last Dance",
-  description: "Last Dance",
+  title: "SocialSport",
+  description: "SocialSport",
 };
 
 const inter = Inter({ subsets: ["latin"] });

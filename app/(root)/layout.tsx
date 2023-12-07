@@ -13,8 +13,8 @@ import { connectToDB } from "@/lib/mongoose";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Last Dance",
-  description: "Last Dance",
+  title: "SocialSport",
+  description: "SocialSport",
 };
 // connectToDB();
 
@@ -29,14 +29,14 @@ export default function RootLayout({
         baseTheme: dark,
       }}
     >
-      <html lang='en'>
+      <html lang="en">
         <body className={inter.className}>
           <Topbar />
 
-          <main className='flex flex-row'>
+          <main className="flex flex-row">
             <LeftSidebar />
-            <section className='main-container'>
-              <div className='w-full max-w-4xl'>{children}</div>
+            <section className="main-container">
+              <div className="w-full max-w-4xl">{children}</div>
             </section>
             {/* @ts-ignore */}
           </main>
@@ -47,4 +47,3 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
-

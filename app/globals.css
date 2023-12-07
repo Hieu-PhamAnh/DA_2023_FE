@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-
   /* main */
   .main-container {
     @apply flex min-h-screen flex-1 flex-col items-center bg-dark-1 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
@@ -126,7 +125,9 @@
   @apply max-sm:hidden;
 }
 
-.cl-organizationSwitcherTrigger .cl-organizationPreview .cl-organizationPreviewTextContainer {
+.cl-organizationSwitcherTrigger
+  .cl-organizationPreview
+  .cl-organizationPreviewTextContainer {
   @apply max-sm:hidden;
 }
 

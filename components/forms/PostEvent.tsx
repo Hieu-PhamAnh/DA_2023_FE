@@ -33,18 +33,27 @@ interface Props {
   eventDescription?: string;
 }
 
-function PostEvent({ userId, authorId, opponentId, eventId, eventTitle, eventLocation, eventTime,eventDescription }: Props) {
+function PostEvent({
+  userId,
+  authorId,
+  opponentId,
+  eventId,
+  eventTitle,
+  eventLocation,
+  eventTime,
+  eventDescription,
+}: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { organization } = useOrganization();
-  
+
   const form = useForm<z.infer<typeof EventValidation>>({
     resolver: zodResolver(EventValidation),
     defaultValues: {
       title: eventTitle || "",
       location: eventLocation || "",
-      time : eventTime || new Date(),
+      time: eventTime || new Date(),
       description: eventDescription || "",
     },
   });
@@ -72,13 +81,12 @@ function PostEvent({ userId, authorId, opponentId, eventId, eventTitle, eventLoc
           path: pathname,
         });
       }
-  
+
       await router.push("/");
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  
 
   return (
     <Form {...form}>
@@ -86,7 +94,7 @@ function PostEvent({ userId, authorId, opponentId, eventId, eventTitle, eventLoc
         className="mt-10 flex flex-col justify-start gap-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-         <FormField
+        <FormField
           control={form.control}
           name="opponentId"
           render={({ field }) => (
@@ -146,30 +154,30 @@ function PostEvent({ userId, authorId, opponentId, eventId, eventTitle, eventLoc
             </FormItem>
           )}
         />
-         <FormField
+        <FormField
           control={form.control}
           name="time"
           render={({ field }) => (
             <FormItem className="flex w-full flex-col gap-3">
-            <FormLabel className="text-base-semibold text-light-2">
-              Time
-            </FormLabel>
-            <FormControl className="no-focus border border-dark-4 bg-dark-3 text-light-1">
-            <DatePicker
-                selected={selectedDate}
-                onChange={(value) => {
-                  const date = new Date(value);
-                  setSelectedDate(date);
-                }}
-                showTimeSelect
-                dateFormat="MMMM d, yyyy h:mm aa"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+              <FormLabel className="text-base-semibold text-light-2">
+                Time
+              </FormLabel>
+              <FormControl className="no-focus border border-dark-4 bg-dark-3 text-light-1">
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(value) => {
+                    const date = new Date(value);
+                    setSelectedDate(date);
+                  }}
+                  showTimeSelect
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
         />
-         <FormField
+        <FormField
           control={form.control}
           name="description"
           render={({ field }) => (

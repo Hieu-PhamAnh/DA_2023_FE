@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 import {
   Form,
@@ -24,6 +25,7 @@ import { isBase64Image } from "@/lib/utils";
 
 import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
+import { POSITION, STAT } from "@/constants";
 
 interface Props {
   user: {
@@ -33,6 +35,21 @@ interface Props {
     name: string;
     bio: string;
     image: string;
+    position: string;
+    Crossing: string;
+    Finishing: string;
+    Heading: string;
+    ShortPass: string;
+    Freekick: string;
+    LongPass: string;
+    BallControl: string;
+    Intercept: string;
+    Positioning: string;
+    Marking: string;
+    Tackle: string;
+    GKReflexes: string;
+    Height: string;
+    Weight: string;
   };
   btnTitle: string;
 }
@@ -51,6 +68,21 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       name: user?.name ? user.name : "",
       username: user?.username ? user.username : "",
       bio: user?.bio ? user.bio : "",
+      position: user?.position || "",
+      Crossing: user?.Crossing || "",
+      Finishing: user?.Finishing || "",
+      Heading: user?.Heading || "",
+      ShortPass: user?.ShortPass || "",
+      Freekick: user?.Freekick || "",
+      LongPass: user?.LongPass || "",
+      BallControl: user?.BallControl || "",
+      Intercept: user?.Intercept || "",
+      Positioning: user?.Positioning || "",
+      Marking: user?.Marking || "",
+      Tackle: user?.Tackle || "",
+      GKReflexes: user?.GKReflexes || "",
+      Height: user?.Height || "",
+      Weight: user?.Weight || "",
     },
   });
 
@@ -73,7 +105,54 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       userId: user.id,
       bio: values.bio,
       image: values.profile_photo,
+      position: "",
+      Crossing: values.Crossing,
+      Finishing: values.Finishing,
+      Heading: values.Heading,
+      ShortPass: values.ShortPass,
+      Freekick: values.Freekick,
+      LongPass: values.LongPass,
+      BallControl: values.BallControl,
+      Intercept: values.Intercept,
+      Positioning: values.Positioning,
+      Marking: values.Marking,
+      Tackle: values.Tackle,
+      GKReflexes: values.GKReflexes,
+      Height: values.Height,
+      Weight: values.Weight,
     });
+
+    // let result = 0;
+    // // let stats = STAT.map((key) => Number(updateUser[key]));
+    // let stats = [
+    //   "77",
+    //   "92",
+    //   "82",
+    //   "82",
+    //   "84",
+    //   "69",
+    //   "88",
+    //   "41",
+    //   "92",
+    //   "62",
+    //   "45",
+    //   "80",
+    //   "183",
+    //   "86",
+    // ];
+
+    // await axios
+    //   .post(`http://localhost/predict`, {
+    //     stats,
+    //   })
+    //   .then(async (response) => {
+    //     result = response.data.position;
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //   });
+    // let position = POSITION[result];
+    // console.log(position);
 
     if (pathname === "/profile/edit") {
       router.back();
@@ -108,40 +187,40 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   return (
     <Form {...form}>
       <form
-        className='flex flex-col justify-start gap-10'
+        className="flex flex-col justify-start gap-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
-          name='profile_photo'
+          name="profile_photo"
           render={({ field }) => (
-            <FormItem className='flex items-center gap-4'>
-              <FormLabel className='account-form_image-label'>
+            <FormItem className="flex items-center gap-4">
+              <FormLabel className="account-form_image-label">
                 {field.value ? (
                   <Image
                     src={field.value}
-                    alt='profile_icon'
+                    alt="profile_icon"
                     width={96}
                     height={96}
                     priority
-                    className='rounded-full object-contain'
+                    className="rounded-full object-contain"
                   />
                 ) : (
                   <Image
-                    src='/assets/profile.svg'
-                    alt='profile_icon'
+                    src="/assets/profile.svg"
+                    alt="profile_icon"
                     width={24}
                     height={24}
-                    className='object-contain'
+                    className="object-contain"
                   />
                 )}
               </FormLabel>
-              <FormControl className='flex-1 text-base-semibold text-gray-200'>
+              <FormControl className="flex-1 text-base-semibold text-gray-200">
                 <Input
-                  type='file'
-                  accept='image/*'
-                  placeholder='Add profile photo'
-                  className='account-form_image-input'
+                  type="file"
+                  accept="image/*"
+                  placeholder="Add profile photo"
+                  className="account-form_image-input"
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
@@ -151,16 +230,16 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
         <FormField
           control={form.control}
-          name='name'
+          name="name"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
                 Name
               </FormLabel>
               <FormControl>
                 <Input
-                  type='text'
-                  className='account-form_input no-focus'
+                  type="text"
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -171,16 +250,16 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
         <FormField
           control={form.control}
-          name='username'
+          name="username"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
                 Username
               </FormLabel>
               <FormControl>
                 <Input
-                  type='text'
-                  className='account-form_input no-focus'
+                  type="text"
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -191,16 +270,16 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
         <FormField
           control={form.control}
-          name='bio'
+          name="bio"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
                 Bio
               </FormLabel>
               <FormControl>
                 <Textarea
-                  rows={10}
-                  className='account-form_input no-focus'
+                  rows={3}
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -208,8 +287,295 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             </FormItem>
           )}
         />
-
-        <Button type='submit' className='bg-lime-500'>
+        {/* stat */}
+        <FormField
+          control={form.control}
+          name="position"
+          render={({ field }) => (
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
+                position
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  className="account-form_input no-focus"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="grid grid-cols-14">
+          <FormField
+            control={form.control}
+            name="Crossing"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Crossing
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Finishing"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Finishing
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Heading"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Heading
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="ShortPass"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  ShortPass
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Freekick"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Freekick
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="LongPass"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  LongPass
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="BallControl"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  BallControl
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Intercept"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Intercept
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Positioning"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Positioning
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Marking"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Marking
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Tackle"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Tackle
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="GKReflexes"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  GKReflexes
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Height"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Height
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="Weight"
+            render={({ field }) => (
+              <FormItem className="flex w-full flex-col gap-3">
+                <FormLabel className="text-base-semibold text-light-2">
+                  Weight
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    className="account-form_input no-focus"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <Button type="submit" className="bg-lime-500">
           {btnTitle}
         </Button>
       </form>
