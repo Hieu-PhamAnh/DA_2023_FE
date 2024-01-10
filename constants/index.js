@@ -17,7 +17,7 @@ export const sidebarLinks = [
   {
     imgURL: "/assets/heart.svg",
     route: "/activity",
-    label: "Activity",
+    label: "Notification",
   },
   {
     imgURL: "/assets/create.svg",
@@ -27,7 +27,7 @@ export const sidebarLinks = [
   {
     imgURL: "/assets/calendar.svg",
     route: "/event",
-    label: "Event",
+    label: "Chat",
   },
   {
     imgURL: "/assets/user.svg",
@@ -54,7 +54,7 @@ export const profileTabs = [
   },
   {
     value: "events",
-    label: "Events",
+    label: "Sport",
     icon: "/assets/event.svg",
   },
 ];
@@ -77,19 +77,20 @@ export const STAT = [
   "Height",
   "Weight",
 ];
-// export const communityTabs = [{
-//     value: "threads",
-//     label: "Threads",
-//     icon: "/assets/reply.svg"
-//   },
-//   {
-//     value: "members",
-//     label: "Members",
-//     icon: "/assets/members.svg"
-//   },
-//   {
-//     value: "requests",
-//     label: "Requests",
-//     icon: "/assets/request.svg"
-//   },
-// ];
+export const communityTabs = [
+  {
+    value: "threads",
+    label: "Threads",
+    icon: "/assets/reply.svg",
+  },
+  {
+    value: "members",
+    label: "Members",
+    icon: "/assets/members.svg",
+  },
+  {
+    value: "requests",
+    label: "Requests",
+    icon: "/assets/request.svg",
+  },
+];

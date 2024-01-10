@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
@@ -17,12 +17,17 @@ function UserCard({ _id, id, name, username, imgUrl, personType }: Props) {
   const handleCreateEvent = () => {
     router.push(`/create-event/${id}`);
   };
-  console.log(_id)
+  console.log(_id);
   return (
     <article className="user-card">
       <div className="user-card_avatar">
         <div className="relative h-12 w-12">
-          <Image src={imgUrl} alt="user_logo" fill className="rounded-full object-cover" />
+          <Image
+            src={imgUrl}
+            alt="user_logo"
+            fill
+            className="rounded-full object-cover"
+          />
         </div>
 
         <div className="flex-1 text-ellipsis">
@@ -34,14 +39,16 @@ function UserCard({ _id, id, name, username, imgUrl, personType }: Props) {
       <Button
         className="user-card_btn"
         onClick={() =>
-          router.push(personType === "User" ? `/profile/${id}` : `/communities/${id}`)
+          router.push(
+            personType === "User" ? `/profile/${id}` : `/communities/${id}`
+          )
         }
       >
         View
       </Button>
 
       <Button className="user-card_btn" onClick={handleCreateEvent}>
-        Create Event
+        Chat
       </Button>
     </article>
   );
