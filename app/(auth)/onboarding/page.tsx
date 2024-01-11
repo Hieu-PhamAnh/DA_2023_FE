@@ -18,7 +18,7 @@ async function Page() {
     name: userInfo?.name || user?.firstName || "",
     bio: userInfo?.bio || "",
     image: userInfo?.image || user?.imageUrl,
-    position: userInfo?.Crossing || "Không cần",
+    position: userInfo?.Crossing || "Không cần nhập",
     Crossing: userInfo?.Crossing || "",
     Finishing: userInfo?.Finishing || "",
     Heading: userInfo?.Heading || "",
