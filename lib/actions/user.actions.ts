@@ -106,20 +106,38 @@ interface Params {
   image: string;
   path: string;
   position: string;
+  Potential: string;
+  WeakFoot: string;
+  Skill: string;
   Crossing: string;
   Finishing: string;
   Heading: string;
   ShortPass: string;
+  Volley: string;
+  Dribbling: string;
+  Curve: string;
   Freekick: string;
   LongPass: string;
   BallControl: string;
+  Acceleration: string;
+  Speed: string;
+  Agility: string;
+  Reactions: string;
+  Balance: string;
+  ShotPower: string;
+  Stamina: string;
+  LongShots: string;
+  Aggression: string;
   Intercept: string;
   Positioning: string;
-  Marking: string;
+  Vision: string;
+  Penalties: string;
+  Composure: string;
   Tackle: string;
-  GKReflexes: string;
+  SlidingTackle: string;
   Height: string;
   Weight: string;
+  GKReflexes: string;
 }
 
 export async function updateUser({
@@ -130,40 +148,76 @@ export async function updateUser({
   username,
   image,
   position,
+  Potential,
+  WeakFoot,
+  Skill,
   Crossing,
   Finishing,
   Heading,
   ShortPass,
+  Volley,
+  Dribbling,
+  Curve,
   Freekick,
   LongPass,
   BallControl,
+  Acceleration,
+  Speed,
+  Agility,
+  Reactions,
+  Balance,
+  ShotPower,
+  Stamina,
+  LongShots,
+  Aggression,
   Intercept,
   Positioning,
-  Marking,
+  Vision,
+  Penalties,
+  Composure,
   Tackle,
-  GKReflexes,
+  SlidingTackle,
   Height,
   Weight,
+  GKReflexes,
 }: Params): Promise<void> {
   try {
     connectToDB();
 
     let result = 0;
     let stats = [
+      Potential,
+      WeakFoot,
+      Skill,
       Crossing,
       Finishing,
       Heading,
       ShortPass,
+      Volley,
+      Dribbling,
+      Curve,
       Freekick,
       LongPass,
       BallControl,
+      Acceleration,
+      Speed,
+      Agility,
+      Reactions,
+      Balance,
+      ShotPower,
+      Stamina,
+      LongShots,
+      Aggression,
       Intercept,
       Positioning,
-      Marking,
+      Vision,
+      Penalties,
+      Composure,
       Tackle,
-      GKReflexes,
+      SlidingTackle,
       Height,
       Weight,
+      GKReflexes,
     ];
 
     //   console.log(stats);
@@ -188,20 +242,38 @@ export async function updateUser({
         bio,
         image,
         position,
+        Potential,
+        WeakFoot,
+        Skill,
         Crossing,
         Finishing,
         Heading,
         ShortPass,
+        Volley,
+        Dribbling,
+        Curve,
         Freekick,
         LongPass,
         BallControl,
+        Acceleration,
+        Speed,
+        Agility,
+        Reactions,
+        Balance,
+        ShotPower,
+        Stamina,
+        LongShots,
+        Aggression,
         Intercept,
         Positioning,
-        Marking,
+        Vision,
+        Penalties,
+        Composure,
         Tackle,
-        GKReflexes,
+        SlidingTackle,
         Height,
         Weight,
+        GKReflexes,
         onboarded: true,
       },
       { upsert: true }
