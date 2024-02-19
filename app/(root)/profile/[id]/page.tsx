@@ -83,7 +83,7 @@ async function Page({ params }: { params: { id: string } }) {
             {/* @ts-ignore */}{" "}
             {userInfo.threadsCount === 0 ? (
               <div className="mt-9 flex flex-col gap-10">
-                <p className="no-result">No threads found</p>
+                <p className="no-result">No posts found</p>
               </div>
             ) : (
               <ThreadsTab
